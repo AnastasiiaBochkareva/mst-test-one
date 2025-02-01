@@ -6,9 +6,6 @@ function toggleHeaderScrolledClass() {
         header?.classList.remove("scrolled");
     }
 }
-function handleScroll() {
-    toggleHeaderScrolledClass();
-}
 
 function changeHeaderColDynamicWidth() {
     const headerColDynamic = document.querySelector(".header__col-dynamic");
@@ -20,10 +17,17 @@ function changeHeaderColDynamicWidth() {
 
 function changeBannerPadding() {
     const container = document.querySelector(".banner .container");
-    const headerHeight = document.querySelector(".header")?.offsetHeight;
+    const headerHeight = document.querySelector(".header")?.clientHeight;
     if (container && headerHeight) {
         container.style.paddingTop = `${headerHeight}px`;
     }
+}
+function handleScroll() {
+    toggleHeaderScrolledClass();
+}
+
+function handleResize() {
+    changeBannerPadding();
 }
 
 function handleForm(e) {
@@ -79,6 +83,7 @@ function handleForm(e) {
 
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
     document.addEventListener("submit", handleForm);
 
     changeBannerPadding();
